@@ -25,7 +25,8 @@ def allocate():
     # Call your Python function to process the allocation
     suggestions = process_input(schools)
 
-    # return jsonify({"suggestions": suggestions})
     return jsonify(suggestions)
+
 if __name__ == "__main__":
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port, debug=True)
