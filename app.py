@@ -3,13 +3,12 @@ from flask_cors import CORS
 from flask import Flask, request, jsonify
 from dotenv import load_dotenv
 import os
-from teacher_allocation import process_input  # Your Python allocation function
+from teacher_allocation import process_input
 
 load_dotenv()
 
 app = Flask(__name__)
 
-# ✅ CORS config: allow only your frontend domain
 CORS(app, resources={r"/*": {"origins": "https://smart-teacher-reallocation.vercel.app"}})
 
 @app.route('/get-opencage-key', methods=['GET'])
@@ -25,10 +24,8 @@ def allocate():
         data = request.get_json()
         schools = data.get("schools", [])
         
-        # Optional: Log for debugging
         print("Received schools data:", schools)
 
-        # Call your Python function to process the allocation
         suggestions = process_input(schools)
 
         return jsonify(suggestions)

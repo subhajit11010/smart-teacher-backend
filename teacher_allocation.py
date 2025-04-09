@@ -127,9 +127,6 @@ def create_df(schools):
     additional_teachers_needed = [math.ceil(required - current) for current, required in zip(current_teachers, required_teachers)]
     print(df.columns)
 
-    
-    # df.to_csv("df.csv", index= True)
-    # df_test_scaled.to_csv("df_test_scaled.csv", index = True)
 
 def count_positive_and_negative_elem(sub, schools_with_sub):
     teacher_required_in_sub=[]
@@ -197,13 +194,13 @@ def send_suggestions():
         schools_with_sub = []
         for sch in data:
             school = data[sch]
-            if sub in school["subjects_taught"]:  # ✅ Check for ALL subjects dynamically
+            if sub in school["subjects_taught"]: 
                 schools_with_sub.append(sch)
 
         positive_count, negative_count = count_positive_and_negative_elem(sub, schools_with_sub)
 
         if positive_count == 0 or negative_count == 0:
-            continue  # ✅ Skip if all schools either need or have excess teachers
+            continue 
         else:
             suggestions[sub] = analyze_and_reallocate(sub, schools_with_sub)
 
