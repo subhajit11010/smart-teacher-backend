@@ -8,7 +8,9 @@ from teacher_allocation import process_input  # Your Python allocation function
 load_dotenv()
 
 app = Flask(__name__)
-CORS(app)
+
+# ✅ CORS config: allow only your frontend domain
+CORS(app, resources={r"/*": {"origins": "https://smart-teacher-reallocation.vercel.app"}})
 
 @app.route('/get-opencage-key', methods=['GET'])
 def get_opencage_key():
@@ -19,13 +21,21 @@ def get_opencage_key():
 
 @app.route("/allocate", methods=["POST"])
 def allocate():
-    data = request.json
-    schools = data.get("schools", [])
+    try:
+        data = request.get_json()
+        schools = data.get("schools", [])
+        
+        # Optional: Log for debugging
+        print("Received schools data:", schools)
 
-    # Call your Python function to process the allocation
-    suggestions = process_input(schools)
+        # Call your Python function to process the allocation
+        suggestions = process_input(schools)
 
-    return jsonify(suggestions)
+        return jsonify(suggestions)
+    
+    except Exception as e:
+        print("Error during allocation:", str(e))
+        return jsonify({"error": str(e)}), 500
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
