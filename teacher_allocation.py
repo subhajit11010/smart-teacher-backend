@@ -164,7 +164,7 @@ def analyze_and_reallocate(sub, schools_with_sub):
                                 if teacher_to_be_allocated not in allocated_teachers:
                                     allocated_teachers.add(teacher_to_be_allocated)
                                     suggestions.append(
-                                            f"Teacher {teacher_to_be_allocated} will be allocated to {data[sch1]["sch_name"]} from {data[sch2]["sch_name"]} "
+                                            f"Teacher {teacher_to_be_allocated} will be allocated to {data[sch1]['sch_name']} from {data[sch2]['sch_name']} "
                                             f"having a {teacher_qualification} degree in {sub}."
                                     )
                                     school_subject_teacher_req[sch1][sub] -= 1
@@ -183,7 +183,7 @@ def analyze_and_reallocate(sub, schools_with_sub):
                                 if teacher_to_be_allocated not in allocated_teachers:
                                     allocated_teachers.add(teacher_to_be_allocated)
                                     suggestions.append(
-                                                f"Teacher {teacher_to_be_allocated} will be allocated to {data[sch2]["sch_name"]} from {data[sch1]["sch_name"]} "
+                                                f"Teacher {teacher_to_be_allocated} will be allocated to {data[sch2]['sch_name']} from {data[sch1]['sch_name']} "
                                                 f"having a {teacher_qualification} degree in {sub}."
                                     )
                                     school_subject_teacher_req[sch1][sub] += 1
